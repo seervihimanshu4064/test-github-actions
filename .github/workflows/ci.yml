@@ -1,20 +1,16 @@
 name: CI Cache
-on:
-  push:
-    branches: [ main ]
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
+    - name: Checkout
       uses: actions/checkout@v4
-    
     - name: prime-cache-899883c
-      id: prime-cache-899883c
+      id: cache-step
       uses: actions/cache@v4
       with:
         key: cache-899883c
         path: ~/.npm
-    
-    - name: Echo cache result
-      run: echo "Cache hit/miss: ${{ steps.prime-cache-899883c.outputs.cache-hit }}"
+    - name: Echo result
+      run: echo "Cache: ${{ steps.cache-step.outputs.cache-hit }}"

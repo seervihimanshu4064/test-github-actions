@@ -1,14 +1,14 @@
-name: CI Cache
-on: [push]
+name: Cache Test
+on: push
 jobs:
-  build:
+  cache:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: prime-cache-899883c
-      id: cache
-      uses: actions/cache@v4
-      with:
-        key: cache-899883c
-        path: ~/.npm
-    - run: echo "Result: ${{ steps.cache.outputs.cache-hit }}"
+      - uses: actions/checkout@v4
+      - name: prime-cache-899883c
+        id: cache
+        uses: actions/cache@v4
+        with:
+          key: cache-899883c
+          path: ~/.npm
+      - run: echo cache-hit-${{ steps.cache.outputs.cache-hit }}
